@@ -4,21 +4,19 @@ import { AppContext } from '../context/AppContext';
 
 const Currency = () => {
     const {currency} = useContext(AppContext);
-    const [newCurrency, setNewCurrency] = useContext(AppContext);
+    const [selectedCurrency, setCurrency ] = useState(currency);
     const handleCurrencyChange = (event) => {
-       setNewCurrency(event.target.value);
+        setCurrency(event.target.value);
     }
     return (
 <div className='alert alert-secondary'>
-<span>Currency: £{currency}</span>
-<input type="number" step="10" value={newCurrency} onChange={handleCurrencyChange}>
-<div id="currencyDropdown">
-      <div data-value="USD">Dollar ($)</div>
-      <div data-value="GBP">Pound (£)</div>
-      <div data-value="EUR">Euro (€)</div>
-      <div data-value="INR">Rupee (₹)</div>
-    </div>
-</input>
+<span> {currency} {selectedCurrency === 'USD' ? '$' : selectedCurrency === 'GBP' ? '£' : selectedCurrency === 'EUR' ? '€' : '₹'} {currency}</span>
+      <select value={selectedCurrency} onChange={handleCurrencyChange}>
+        <option value="USD">$ Dollar</option>
+        <option value="GBP">£ Pound</option>
+        <option value="EUR">€ Euro</option>
+        <option value="INR">₹ Rupee</option>
+      </select>
 </div>
     );
 };
